@@ -12,6 +12,6 @@ module.exports = function (gulp) {
                 useRelativePaths: true, 
                 removeLineBreaks:true 
             }))
-            .pipe(gulp.dest('app/dist'));
+            .pipe(gulp.dest('./www/build/app'));
     });
 }

@@ -34,8 +34,14 @@
                 gulpWatch('app/**/*.scss', function () {
                     gulp.start('sass');
                 });
-                gulpWatch(['app/**/*.html', 'app/**/*.ts'], function () {
-                    gulp.start('build-js-app')
+                // gulpWatch(['app/**/*.html', 'app/**/*.ts'], function () {
+                //     gulp.start('build-js-app')
+                // });
+                gulpWatch('app/**/*.ts', function () {
+                    gulp.start('compile-tsc')
+                });
+                gulpWatch('app/**/*.js', function () {
+                    gulp.start('bundle-app')
                 });
                 done();
             }
