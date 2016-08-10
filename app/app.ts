@@ -2,8 +2,7 @@ import {ionicBootstrap, Platform} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-
-
+import "./test";
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
@@ -20,7 +19,5 @@ export class MyApp {
 }
 ionicBootstrap(MyApp, [], {
   tabbarPlacement:"bottom"
-}); // http://ionicframework.com/docs/v2/api/config/Config/
-
-
-
+}); 
+// http://ionicframework.com/docs/v2/api/config/Config/

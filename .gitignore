@@ -1,6 +1,8 @@
 # Specifies files to intentionally ignore when using Git
 # http://git-scm.com/docs/gitignore
-
+# Exclude Webstorm-Bullshit
+.idea
+/.vscode
 /node_modules
 /www/build
 /platforms
@@ -9,12 +11,6 @@
 .DS_Store
 Thumbs.db
 
-# Exclude compiled files in app
-app/**/*.js
-app/**/*.js.map
-
 # Exclude typings
-typings
+/typings
 
-# Exclude Webstorm-Bullshit
-.idea

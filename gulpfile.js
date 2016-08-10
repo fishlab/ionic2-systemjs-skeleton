@@ -1,5 +1,6 @@
 (function (isRelease, shouldWatch) {
     var gulp = require('gulp');
+    var gulpUtil = require('gulp-util');
     var gulpWatch = require('gulp-watch');
     var del = require('del');
     var runSequence = require('run-sequence');
@@ -7,7 +8,7 @@
     // Require tasks in 'gulptasks' folder
     ['systemjs-build', 'static-bundle', 'compile-tsc', 'app-bundle', 'build-js']
         .forEach(function (task) {
-            require('./gulptasks/'+task+'.js')(gulp, isRelease);
+            require('./gulptasks/' + task + '.js')(gulp, isRelease);
         });
 
     // Default ionic hooks
@@ -19,7 +20,14 @@
 
     // Default ionic tasks
     var buildSass = require('ionic-gulp-sass-build');
+    var copyHTML = require('ionic-gulp-html-copy');
     var copyFonts = require('ionic-gulp-fonts-copy');
+
+    // gulp.task('html', function (args) {
+    //     return isRelease ? gulpUtil.log('will not copy html files cause of release') : copyHTML({ dest: 'www/build/app' });
+    // });
+    gulp.task('html', copyHTML);
+
     gulp.task('sass', buildSass);
     gulp.task('fonts', copyFonts);
     gulp.task('clean', function () {
@@ -28,8 +36,11 @@
 
     // Watch task
     gulp.task('watch', ['clean'], function (done) {
+        var typescript = require('gulp-typescript');
+        var inlineNg2Template = require('gulp-inline-ng2-template');
+        var tsProject = typescript.createProject('./tsconfig.json');
         runSequence(
-            ['sass', 'fonts', 'build-js-lib','build-js-app'],
+            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'],
             function () {
                 gulpWatch('app/**/*.scss', function () {
                     gulp.start('sass');
@@ -37,25 +48,87 @@
                 // gulpWatch(['app/**/*.html', 'app/**/*.ts'], function () {
                 //     gulp.start('build-js-app')
                 // });
-                gulpWatch('app/**/*.ts', function () {
-                    gulp.start('compile-tsc')
-                });
+
+
                 gulpWatch('app/**/*.js', function () {
                     gulp.start('bundle-app')
                 });
+
+                gulpWatch('app/**/*.html', function (vinly) {
+                    gulpUtil.log('html changed ' + vinly.path);
+                    return gulp
+                        .src(vinly.path, { base: process.cwd() + '/app' })
+                        .pipe(gulp.dest('./www/build'))
+                });
+
+
+                gulpWatch('app/**/*.ts', function (vinly) {
+                    console.log(vinly.path);
+                    // gulp.start('compile-tsc')
+                    // vinly.pipe(process.stdout);
+                    gulp.src(vinly.path, { base: process.cwd() })
+                        // vinly
+                        .pipe(typescript(tsProject))
+                        //todo when dist
+                        // .pipe(inlineNg2Template({
+                        //     base: '/',
+                        //     target: 'es6',
+                        //     useRelativePaths: true,
+                        //     removeLineBreaks: true
+                        // }))
+                        .pipe(gulp.dest('./www/build'));
+                });
+
                 done();
             }
         );
     });
 
+    gulp.task('wt', function (params) {
+        gulpWatch('app/**/*.html', function (vinly) {
+            gulpUtil.log('html changed ' + vinly.path);
+            return gulp
+                .src(vinly.path, { base: process.cwd() + '/app' })
+                .pipe(gulp.dest('./www/build'))
+        });
+    })
+
+    // gulp.task('tt', function () {
+
+
+    //     gulpWatch('app/**/*.ts', function (vinly) {
+    //         console.log(vinly.path);
+    //         // gulp.start('compile-tsc')
+    //         // vinly.pipe(process.stdout);
+    //         gulp.src(vinly.path, { base: process.cwd() })
+    //             // vinly
+    //             .pipe(typescript(tsProject))
+    //             //todo when dist
+    //             .pipe(inlineNg2Template({
+    //                 base: '/',
+    //                 target: 'es6',
+    //                 useRelativePaths: true,
+    //                 removeLineBreaks: true
+    //             }))
+    //             .pipe(gulp.dest('./www/build'));
+    //     });
+    // });
+
     // Build task
-    gulp.task('build', ['clean'], function (done) {
+    // gulp.task('build', ['clean'], function (done) {
+    //     runSequence(
+    //         ['html','sass', 'fonts', 'build-js-lib', 'build-js-app'],
+    //         function () { done(); }
+    //     );
+    // });
+    gulp.task('build', function (done) {
         runSequence(
-            ['sass', 'fonts', 'build-js-lib','build-js-app'],
-            function () { done(); }
+            'clean', 
+            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'], 
+            done
         );
     });
 })(
     process.argv.indexOf('--release') > -1,
     process.argv.indexOf('-l') > -1 || process.argv.indexOf('--livereload') > -1
-);
+    );

@@ -5,7 +5,8 @@ module.exports = function (gulp, isRelease) {
     
     gulp.task('systemjs-build-vendor', function () {
         var builder = new SystemJSBuilder(systemConfig);
-        return builder.bundle('app/**/*.js - [app/**/*]', './www/build/dependencies.js', {sourceMaps: true});
+        // return builder.bundle('www/build/app/**/*.js - [app/**/*]', './www/build/dependencies.js', {sourceMaps: true});
+                return builder.bundle('./app/dependencies.js', './www/build/dependencies.js', {sourceMaps: true});
     });
 
     gulp.task('bundle-vendor', ['systemjs-build-vendor'], function () {

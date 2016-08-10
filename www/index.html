@@ -15,10 +15,10 @@
 <body>
 <!-- cordova.js required for cordova apps -->
 <script src="cordova.js"></script>
-<script src="/build/static.js"></script>
+<script src="build/static.js"></script>
 <script>
     System.config({
-        baseURL: '/build',
+        baseURL: './build',
         packages: {
             app: {
                 format: 'register',
@@ -42,7 +42,7 @@
     });
 </script>
 
-<script src="/build/dependencies.js"></script>
+<script src="build/dependencies.js"></script>
 <!-- this Ionic's root component and where the app will load -->
 <script>
     System.import('app/app').then(null, console.error.bind(console));

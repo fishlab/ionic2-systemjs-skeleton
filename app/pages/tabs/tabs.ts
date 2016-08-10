@@ -5,7 +5,7 @@ import {Page3} from '../page3/page3';
 
 
 @Component({
-  templateUrl: './tabs.html'
+  templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {
   // this tells the tabs component which Pages
