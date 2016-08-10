@@ -14,6 +14,6 @@ module.exports = function (gulp, isRelease) {
         //         removeLineBreaks: true
         //     }));
         // }
-        return stream.pipe(gulp.dest('./www/build/app'));
+        return stream.pipe(gulp.dest('./www/build'));
     });
 }

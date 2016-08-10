@@ -1,3 +1,4 @@
+//todo auto generate
 require('../node_modules/@angular/core/index.js')
 require('../node_modules/ionic-angular/index.js')
 require('../node_modules/ionic-native/dist/index.js')

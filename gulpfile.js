@@ -84,7 +84,7 @@
         );
     });
 
-    gulp.task('wt', function (params) {
+    gulp.task('watch-html', function (params) {
         gulpWatch('app/**/*.html', function (vinly) {
             gulpUtil.log('html changed ' + vinly.path);
             return gulp
@@ -93,9 +93,7 @@
         });
     })
 
-    // gulp.task('tt', function () {
-
-
+    // gulp.task('typescript', function () {
     //     gulpWatch('app/**/*.ts', function (vinly) {
     //         console.log(vinly.path);
     //         // gulp.start('compile-tsc')
@@ -115,19 +113,70 @@
     // });
 
     // Build task
-    // gulp.task('build', ['clean'], function (done) {
-    //     runSequence(
-    //         ['html','sass', 'fonts', 'build-js-lib', 'build-js-app'],
-    //         function () { done(); }
-    //     );
-    // });
     gulp.task('build', function (done) {
         runSequence(
-            'clean', 
-            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'], 
+            'clean',
+            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'],
             done
         );
     });
+
+
+    gulp.task('open', function (params) {
+        var open = require('open');
+        open('http://www.google.com');
+    })
+
+
+    gulp.task('serve', function (params) {
+
+        var webserver = require('gulp-webserver');
+        var serveIndex = require('serve-index');
+        var startServer = function () {
+            return gulp.src('./')
+                .pipe(webserver({
+                    open: true,
+                    port: 8200,
+                    livereload: true,
+                    fallback: 'www/index.html',
+                    // directoryListing: true,
+                    // proxies: [{ source: '/build', target: '/www/build' }],
+                    middleware: [
+                        function directoryMapping(req, res, next) {
+                            console.log(req.url);
+                            if (req.url.startsWith('/build/')) {
+                                req.url = '/www' + req.url;
+                            }
+                            return next();
+                        }
+                    ],
+                }))
+        }
+        var openInBrowser = function () {
+            var open = require('open');
+            open('http://localhost:8200');
+        }
+        startServer();
+        // openInBrowser();
+    });
+
+    var KarmaServer = require('karma').Server;
+
+    gulp.task('test', ['compile'], function (done) {
+        new KarmaServer({
+            configFile: __dirname + '/karma.conf.js',
+            singleRun: true
+        }, done).start();
+    });
+
+
+    gulp.task('watch-test', ['watch'], function (done) {
+        new KarmaServer({
+            configFile: __dirname + '/karma.conf.js',
+            singleRun: false,
+        }, done).start();
+    });
+
 })(
     process.argv.indexOf('--release') > -1,
     process.argv.indexOf('-l') > -1 || process.argv.indexOf('--livereload') > -1

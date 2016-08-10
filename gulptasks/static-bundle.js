@@ -8,7 +8,8 @@ module.exports = function (gulp, isRelease) {
         var chain = gulp.src(files).pipe(sourcemaps.init());
 
         // Compress if building for release
-        if (isRelease) chain = chain.pipe(uglify({mangle: { keep_fnames: true}, compress: {keep_fnames: true} }));
+        if (isRelease)
+             chain = chain.pipe(uglify({mangle: { keep_fnames: true}, compress: {keep_fnames: true} }));
 
         return chain.pipe(concat('static.js')).pipe(sourcemaps.write()).pipe(gulp.dest('./www/build'));
     });

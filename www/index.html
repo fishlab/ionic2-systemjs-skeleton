@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title>Ionic</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
 
     <link ios-href="build/css/app.ios.css" rel="stylesheet">
     <link md-href="build/css/app.md.css" rel="stylesheet">
     <link wp-href="build/css/app.wp.css" rel="stylesheet">
-</head>
-<body>
-<!-- cordova.js required for cordova apps -->
-<script src="cordova.js"></script>
-<script src="build/static.js"></script>
-<script>
+
+    <!-- cordova.js required for cordova apps -->
+    <script src="cordova.js"></script>
+    <script src="build/static.js"></script>
+    <script>
     System.config({
         baseURL: './build',
         packages: {
@@ -42,11 +41,16 @@
     });
 </script>
 
-<script src="build/dependencies.js"></script>
-<!-- this Ionic's root component and where the app will load -->
-<script>
+    <script src="build/dependencies.js"></script>
+    <!-- this Ionic's root component and where the app will load -->
+    <script>
     System.import('app/app').then(null, console.error.bind(console));
 </script>
-<ion-app></ion-app>
+</head>
+
+<body>
+
+    <ion-app></ion-app>
 </body>
+
 </html>
