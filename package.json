@@ -44,10 +44,6 @@
     "ionic-gulp-fonts-copy": "^1.0.0",
     "ionic-gulp-html-copy": "^1.0.0",
     "ionic-gulp-sass-build": "^1.0.0",
-    "run-sequence": "1.2.1",
-    "systemjs-builder": "^0.15.14",
-    "through2": "^2.0.1",
-    "typescript": "^1.8.10",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
@@ -56,7 +52,12 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-systemjs": "^0.14.0",
-    "karma-typescript-preprocessor": "^0.2.1"
+    "karma-typescript-preprocessor": "^0.2.1",
+    "run-sequence": "1.2.1",
+    "systemjs-builder": "^0.15.14",
+    "systemjs-plugin-babel": "0.0.13",
+    "through2": "^2.0.1",
+    "typescript": "^1.8.10"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

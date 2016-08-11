@@ -35,61 +35,54 @@
     });
 
     // Watch task
-    gulp.task('watch', ['clean'], function (done) {
+    gulp.task('watch', function (done) {
         var typescript = require('gulp-typescript');
         var inlineNg2Template = require('gulp-inline-ng2-template');
         var tsProject = typescript.createProject('./tsconfig.json');
-        runSequence(
-            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'],
-            function () {
-                gulpWatch('app/**/*.scss', function () {
-                    gulp.start('sass');
-                });
-                // gulpWatch(['app/**/*.html', 'app/**/*.ts'], function () {
-                //     gulp.start('build-js-app')
-                // });
-
-
-                gulpWatch('app/**/*.js', function () {
-                    gulp.start('bundle-app')
-                });
-
-                gulpWatch('app/**/*.html', function (vinly) {
-                    gulpUtil.log('html changed ' + vinly.path);
-                    return gulp
-                        .src(vinly.path, { base: process.cwd() + '/app' })
-                        .pipe(gulp.dest('./www/build'))
-                });
-
-
-                gulpWatch('app/**/*.ts', function (vinly) {
-                    console.log(vinly.path);
-                    // gulp.start('compile-tsc')
-                    // vinly.pipe(process.stdout);
-                    gulp.src(vinly.path, { base: process.cwd() })
-                        // vinly
-                        .pipe(typescript(tsProject))
-                        //todo when dist
-                        // .pipe(inlineNg2Template({
-                        //     base: '/',
-                        //     target: 'es6',
-                        //     useRelativePaths: true,
-                        //     removeLineBreaks: true
-                        // }))
-                        .pipe(gulp.dest('./www/build'));
-                });
-
-                done();
+        // runSequence(
+        // ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'],
+        var suffixProccessors = {
+            'ts': function (vinly) {
+                gulp.src(vinly.path, { base: process.cwd() })
+                    .pipe(typescript(tsProject))
+                    //todo when dist
+                    // .pipe(inlineNg2Template({
+                    //     base: '/',
+                    //     target: 'es6',
+                    //     useRelativePaths: true,
+                    //     removeLineBreaks: true
+                    // }))
+                    .pipe(gulp.dest('./www/build'));
+            },
+            'js': function () {
+                gulp.start('bundle-app')
+            },
+            'scss': function () {
+                gulp.start('sass');
+            },
+            'html': function (vinly) {
+                return gulp
+                    .src(vinly.path, { base: process.cwd() + '/app' })
+                    .pipe(gulp.dest('./www/build'))
             }
-        );
+        }
+
+        gulpWatch(['app/**/*', 'test/**/*'], function (vinly) {
+             var suffix = vinly.extname.substr(1).toLocaleLowerCase();            
+            gulpUtil.log(suffix + ' file ' + vinly.event + ': ' + vinly.path);
+            var createOrRemove = ['add', 'change'].indexOf(vinly.event) != -1;
+            if (createOrRemove && suffixProccessors[suffix] ) {
+                return suffixProccessors[suffix](vinly);
+            }
+
+        });
+        done();
     });
 
     gulp.task('watch-html', function (params) {
         gulpWatch('app/**/*.html', function (vinly) {
             gulpUtil.log('html changed ' + vinly.path);
-            return gulp
-                .src(vinly.path, { base: process.cwd() + '/app' })
-                .pipe(gulp.dest('./www/build'))
+
         });
     })
 
@@ -122,35 +115,39 @@
     });
 
 
-    gulp.task('open', function (params) {
-        var open = require('open');
-        open('http://www.google.com');
-    })
-
-
-    gulp.task('serve', function (params) {
+    gulp.task('serve', function () {
 
         var webserver = require('gulp-webserver');
-        var serveIndex = require('serve-index');
+        // var serveIndex = require('serve-index');
+        function directoryMapping(req, res, next) {
+            console.log(req.url);
+            if (req.url.startsWith('/build/')) {
+                req.url = '/www' + req.url;
+            }
+            return next();
+        }
+        function cordova(req, res, next) {
+            if (req.url == '/cordova.js') {
+                res.end();
+
+            } else {
+                next();
+            }
+        }
         var startServer = function () {
-            return gulp.src('./')
-                .pipe(webserver({
+            return gulp.src('./www')
+                .pipe(
+                webserver({
                     open: true,
                     port: 8200,
                     livereload: true,
-                    fallback: 'www/index.html',
+                    // path: 'www',
+                    fallback: 'index.html',
                     // directoryListing: true,
                     // proxies: [{ source: '/build', target: '/www/build' }],
-                    middleware: [
-                        function directoryMapping(req, res, next) {
-                            console.log(req.url);
-                            if (req.url.startsWith('/build/')) {
-                                req.url = '/www' + req.url;
-                            }
-                            return next();
-                        }
-                    ],
-                }))
+                    middleware: [cordova],
+                })
+                )
         }
         var openInBrowser = function () {
             var open = require('open');
@@ -162,7 +159,7 @@
 
     var KarmaServer = require('karma').Server;
 
-    gulp.task('test', ['compile'], function (done) {
+    gulp.task('test', ['build'], function (done) {
         new KarmaServer({
             configFile: __dirname + '/karma.conf.js',
             singleRun: true

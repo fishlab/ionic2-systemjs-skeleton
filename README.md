@@ -1,5 +1,5 @@
 # Ionic 2 SystemJS Skeleton
-a improvement of https://github.com/conclurer/ionic2-systemjs
+An improvement of https://github.com/conclurer/ionic2-systemjs
 
 This is a skeleton for [Ionic 2](https://github.com/driftyco/ionic), bundled using [SystemJS Builder](https://github.com/systemjs/builder). SystemJS is used as module loader.
 

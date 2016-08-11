@@ -10,7 +10,7 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "build"
+    "outDir": "www/build"
   },
   "exclude": [
     "node_modules",

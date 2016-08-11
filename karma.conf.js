@@ -1,13 +1,13 @@
 module.exports = function (config) {
   var srcBase = 'app';
-  var srcBuildBase = 'build/app';      // transpiled app JS files
-  var testBuildBase = 'build/test';
+  var srcBuildBase = 'www/build/app';      // transpiled app JS files
+  var testBuildBase = 'www/build/test';
   // var srcAssets ='/base/src/'; // component assets fetched by Angular's compiler
-  var deps = require('./package.json').dependencies;
-  var depsGlob  =[];
-  for (var k in deps){
-    depsGlob .push(k +'/**/*.js');
-  }
+  // var deps = require('./package.json').dependencies;
+  // var depsGlob  =[];
+  // for (var k in deps){
+  //   depsGlob .push('node_modules/'+k +'/**/*.js');
+  // }
   config.set({
     basePath: '',
     frameworks: [
@@ -76,9 +76,16 @@ module.exports = function (config) {
 
       // { pattern: srcBuildBase + '/**/*.js', included: false, watched: true },
       // { pattern: srcBuildBase + '/*.js', included: false, watched: true },
-      { pattern: 'www/build/*.js', included: true, watched: false },
-      { pattern: testBuildBase + '/**/*.js', included: true, watched: true },
-      { pattern: testBuildBase + '/*.js', included: true, watched: true },
+
+      { pattern: 'test/ionic-shiv.js', included: 'head' },
+
+      // { pattern: 'www/build/pages/**/*.html', include: false },
+      { pattern: 'www/build/dependencies.js', included: true, watched: false },
+      { pattern: 'www/build/static.js', included: true, watched: false },
+
+      // { pattern: 'node_modules/**/*.js', include: false},
+      { pattern: testBuildBase + '/**/*.js', included: true },
+      { pattern: testBuildBase + '/*.js', included: true },
       // { pattern: 'systemjs.config.js', included: false, watched: false },
       // 'karma-systemjs-test-shim.js',
 
@@ -87,12 +94,12 @@ module.exports = function (config) {
     // proxied base paths for loading assets
     proxies: {
       // required for component assets fetched by Angular's compiler
-      // "/app/": srcAssets
+      "/build/pages": '/base/www/build/pages'
     },
 
     exclude: [],
     preprocessors: {
-      'build/app/**/*.js': ['coverage']
+      'www/build/app/**/*.js': ['coverage']
     },
     reporters: [
       'progress',
@@ -114,23 +121,34 @@ module.exports = function (config) {
 
     systemjs: {
       // Path to your SystemJS configuration file
-      configFile: 'systemjs.config.js',
+      configFile: 'www/systemjs.config.js',
 
       // Patterns for files that you want Karma to make available, but not loaded until a module requests them. eg. Third-party libraries.
       serveFiles: [
-        'build/**/*.js',
+        'www/build/pages/**/*.html',
+        'www/build/**/*.js',
         // 'node_modules/**/*.js',
         // 'node_modules/**/*.map'
         // 'node_modules/**/*.js',
-        //  'node_modules/@angular/**/*.js'
-      ].concat(depsGlob),
-
+        'node_modules/@angular/**/*.js',
+        'node_modules/ionic-angular/**/*.js',
+        'node_modules/ionic-native/**/*.js',
+        'node_modules/systemjs-plugin-babel/**/*.js'
+      ]
+      // .concat(depsGlob)
+      ,
       // SystemJS configuration specifically for tests, added after your config file.
       // Good for adding test libraries and mock modules
       config: {
         // baseURL: '/base',
+        transpiler: "plugin-babel",
+
+        map: {
+          'plugin-babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
+          'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
+        },
         paths: {
-          '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/testing.js'
+          // '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/testing.js'
         }
       }
     },

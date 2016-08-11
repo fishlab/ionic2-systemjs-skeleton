@@ -12,7 +12,7 @@ export async function main() {
 async function ping() {
  for (var i = 0; i < 10; i++) {
   await delay(300);
-  console.log('ping ..');
+  console.log('ping ...'+i);
  }
 }
 
