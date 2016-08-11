@@ -1,5 +1,11 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Tab 1" tabIcon="pulse"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Tab 2" tabIcon="chatbubbles"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Tab 3" tabIcon="cog"></ion-tab>
-</ion-tabs>
+<ion-content>
+
+  <ion-tabs>
+    <ion-tab [root]="tabTestRoot" tabTitle="Index" tabIcon="pulse"></ion-tab>    
+    <ion-tab [root]="tab1Root" tabTitle="Shops" tabIcon="cog"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Account" tabIcon="person"></ion-tab>
+    <ion-tab [root]="tab3Root" no-tabTitle="Other" tabIcon="chatbubbles"></ion-tab>
+
+  </ion-tabs>
+
+</ion-content>

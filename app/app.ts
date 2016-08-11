@@ -2,7 +2,7 @@ import {ionicBootstrap, Platform} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import "./test";
+
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
@@ -18,6 +18,33 @@ export class MyApp {
   }
 }
 ionicBootstrap(MyApp, [], {
-  tabbarPlacement:"bottom"
-}); 
+  activator: 'highlight',
+
+  tabbarPlacement: 'bottom',
+
+  tabbarLayout: 'icon-right',
+  tabSubPages: false,
+  pageTransition: 'ios',
+
+
+  platforms: {
+    android: {
+      pageTransitionDelay: 0// No More Page Transition Delays
+    },
+    ios: {
+      pageTransitionDelay: 0// Allows for navigation through Tab Pages
+    }
+  }
+  // platforms: {
+  //   ios: {
+  //     tabbarPlacement: 'top',
+  //   },
+
+  //   android:{
+  //     tabbarPlacement:'bottom'
+  //   }
+  // }
+}
+  // http://ionicframework.com/docs/v2/api/config/Config/
+});
 // http://ionicframework.com/docs/v2/api/config/Config/

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Page1} from '../page1/page1';
 import {Page2} from '../page2/page2';
 import {Page3} from '../page3/page3';
+import {Test1 as TestRoot} from '../tests/test1';
 
 
 @Component({
@@ -13,4 +14,6 @@ export class TabsPage {
   tab1Root: any = Page1;
   tab2Root: any = Page2;
   tab3Root: any = Page3;
+  tabTestRoot: any = TestRoot;
+
 }
