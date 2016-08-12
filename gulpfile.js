@@ -6,7 +6,7 @@
     var runSequence = require('run-sequence');
 
     // Require tasks in 'gulptasks' folder
-    ['systemjs-build', 'static-bundle', 'compile-tsc', 'app-bundle', 'build-js']
+    ['systemjs-build', 'static-bundle', 'compile-tsc', 'app-bundle', 'build-js','helpers']
         .forEach(function (task) {
             require('./gulptasks/' + task + '.js')(gulp, isRelease);
         });
@@ -79,12 +79,8 @@
         done();
     });
 
-    gulp.task('watch-html', function (params) {
-        gulpWatch('app/**/*.html', function (vinly) {
-            gulpUtil.log('html changed ' + vinly.path);
 
-        });
-    })
+    gulp.task('compile',['html','compile-tsc','sass']);
 
     // gulp.task('typescript', function () {
     //     gulpWatch('app/**/*.ts', function (vinly) {
@@ -109,7 +105,11 @@
     gulp.task('build', function (done) {
         runSequence(
             'clean',
-            ['html', 'sass', 'fonts', 'build-js-lib', 'build-js-app'],
+            'compile-tsc',            
+            ['html', 'sass', 'fonts', 'build-js-lib'
+                //, 'build-js-app'
+            ],
+
             done
         );
     });
@@ -159,7 +159,7 @@
 
     var KarmaServer = require('karma').Server;
 
-    gulp.task('test', ['build'], function (done) {
+    gulp.task('test', ['compile'], function (done) {
         new KarmaServer({
             configFile: __dirname + '/karma.conf.js',
             singleRun: true
