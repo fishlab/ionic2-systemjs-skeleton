@@ -15,6 +15,7 @@ Clone / download this repository, then run inside the repository's main folder:
 
 ```
 npm install
+gulp build
 ionic serve
 ```
 

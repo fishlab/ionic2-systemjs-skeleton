@@ -6,7 +6,7 @@
     var runSequence = require('run-sequence');
 
     // Require tasks in 'gulptasks' folder
-    ['systemjs-build', 'static-bundle', 'compile-tsc', 'app-bundle', 'build-js']
+    ['systemjs-build', 'static-bundle', 'compile-tsc', 'app-bundle', 'build-js','helpers']
         .forEach(function (task) {
             require('./gulptasks/' + task + '.js')(gulp, isRelease);
         });
