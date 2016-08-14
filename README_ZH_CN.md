@@ -13,10 +13,11 @@
 
 ## 用法
 
-首先安装 Ionic 2 和 cordova 以及其他typescript 相关工具:
+
+首先安装 Ionic 2 和 cordova 以及其他相关工具:
 
 ```
-npm install -g ionic@beta cordova typings typescript
+npm install -g ionic@beta cordova typings typescript karma-cli
 ```
 
 克隆此仓库，进入主目录
@@ -32,7 +33,7 @@ gulp build #将依赖打包成一个文件,编译typescript代码等,比较耗�
 ionic serve 
 ```
 
-测试
+测试,可能需要配置一下环境变量参考[Karma官方文档](https://karma-runner.github.io/1.0/config/browsers.html)
 ```
 gulp test
 ```
