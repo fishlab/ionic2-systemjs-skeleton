@@ -7,6 +7,7 @@ import {AboutPage} from '../about/about';
 import {ContactPage} from '../contact/contact';
 
 
+
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
 })
@@ -18,10 +19,13 @@ export class TabsPage {
   private tab3Root: any;
   private indexPage:any;
 
+
   constructor() {
     // this tells the tabs component which Pages
     // should be each tab's root Page
+
     this.indexPage = IndexPage;
+
     this.tab1Root = HomePage;
     this.tab2Root = AboutPage;
     this.tab3Root = ContactPage;

@@ -20,6 +20,7 @@ export class MyApp {
     });
   }
 }
+
 // http://ionicframework.com/docs/v2/api/config/Config/
 
 let config = {
