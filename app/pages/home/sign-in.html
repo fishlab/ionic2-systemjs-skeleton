@@ -5,21 +5,24 @@
 </ion-header>
 
 <ion-content padding>
-<ion-list>
+  <ion-list>
 
-  <ion-item>
-    <ion-label fixed>Username</ion-label>
-    <ion-input type="text" [(ngModel)]="name"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label fixed>Password</ion-label>
-    <ion-input type="password"  [(ngModel)]="password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
 
-  <ion-item>
-      <button  (click)="signIn()" outline>登录</button>
-  </ion-item>
 
-</ion-list>
+  </ion-list>
+
+
+  <div padding>
+    <button block (click)="signIn()">登录</button>
+  </div>
+
 </ion-content>

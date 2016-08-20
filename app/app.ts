@@ -3,6 +3,7 @@ import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {providers} from "./providers";
+import {enableProdMode} from '@angular/core';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
@@ -31,7 +32,7 @@ let config = {
 
   tabbarLayout: 'icon-right',
   tabSubPages: false,
-  // pageTransition: 'ios',
+  pageTransition: 'ios',
 
 
   platforms: {
@@ -52,5 +53,6 @@ let config = {
   //   }
   // }
 }
+enableProdMode();
 ionicBootstrap(MyApp, providers, config);
 // http://ionicframework.com/docs/v2/api/config/Config/

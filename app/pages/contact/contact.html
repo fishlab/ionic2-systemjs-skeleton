@@ -7,11 +7,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
+  <ion-list *ngFor="let order of orders" >
+    <ion-list-header>{{order.shop.name}}</ion-list-header>
+    <ion-item *ngFor="let item of order.items">
       <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+      {{item.product.name}} ({{item.product.unit_price}}) x {{item.amount}}
     </ion-item>
   </ion-list>
+
+
 </ion-content>
