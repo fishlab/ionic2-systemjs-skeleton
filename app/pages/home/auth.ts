@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {AccountService} from "../../services/AccountService";
-@Component({
-  templateUrl: 'build/pages/home/sign-in.html',
-  providers: [NavController, AccountService]
+import {ProfilePage} from "./profile";
 
+@Component({
+  templateUrl: 'build/pages/home/sign-in.html'
 })
 export class SignInPage {
 
@@ -18,13 +18,13 @@ export class SignInPage {
 
   signIn() {
     // console.log(this.accountService);
-    this.accountService.signIn(this.name, this.password).subscribe(res => {
-      this.result = res;
-    },
-      e => {
-        this.result = e;
-      }
-    )
+    this.accountService.signIn(this.name, this.password).then(result => {
+      this.result = result;
+      this.navCtrl.push(ProfilePage);
+    }).catch(err=>{
+      console.log(err);
+      
+    })
 
   }
 }

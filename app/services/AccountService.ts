@@ -1,26 +1,32 @@
 import { Injectable } from "@angular/core"
 import { Http, Response, Headers } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map'
 import { Account } from './Account';
+import {RemoteService} from "./index";
 
 //todo refactor
 @Injectable()
-export class AccountService {
-  constructor(private http: Http) { }
-  private heroesUrl = 'http://localhost:8000/auth/sign-in';  // URL to web API
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-  signIn(name: string, password: string): any {
-    console.log(arguments);
-    var toLogin = { "username": name, "password": password }
-    return this.http.post(this.heroesUrl, JSON.stringify(toLogin), { headers: this.headers })
-      // .subscribe(
-      // data => this.extractData(data),
-      // error => this.handleError(error)
-      // )
-    // .toPromise().then(res => res.json() )
-    // .then(this.extractData)
-    // .catch(this.handleError);
+export class AccountService extends RemoteService{
+  constructor(private http: Http) { 
+    super();
   }
+  private apiUrl = '/auth/sign-in';  // URL to web API
+
+  signIn(name: string, password: string): Promise<any> {
+    var toLogin = { "name": name, "password": password };
+    return this.http
+      .post( this.api(this.apiUrl), toLogin )
+      // .catch(err=>{
+      //   // Promise.reject(err);
+      //   console.log(err);
+        
+      //   return err;
+      // })
+      .toPromise()
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || {};

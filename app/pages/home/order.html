@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+    <ion-title>Order</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding="" >
+  <ion-segment [(ngModel)]="relationship" danger>
+    <ion-segment-button value="friends" (ionSelect)="selected1()">
+      Friends
+    </ion-segment-button>
+    <ion-segment-button value="enemies" (ionSelect)="selected2()">
+      Enemies
+    </ion-segment-button>
+  </ion-segment>
+
+
+</ion-content>

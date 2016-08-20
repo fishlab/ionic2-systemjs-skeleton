@@ -4,8 +4,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="index">
-  <ion-card *ngFor="let product of products" >
+<ion-content class="index">
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="搜索"></ion-searchbar>
+  <ion-card *ngFor="let product of products" (click)="openDetail(product)" >
     <img src="img/nin-live.png" />
     <ion-card-content>
       <ion-card-title>

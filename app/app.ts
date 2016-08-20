@@ -25,13 +25,13 @@ export class MyApp {
 // http://ionicframework.com/docs/v2/api/config/Config/
 
 let config = {
-  activator: 'highlight',
+  // activator: 'highlight',
 
   tabbarPlacement: 'bottom',
 
   tabbarLayout: 'icon-right',
   tabSubPages: false,
-  pageTransition: 'ios',
+  // pageTransition: 'ios',
 
 
   platforms: {
