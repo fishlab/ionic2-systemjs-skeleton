@@ -32,7 +32,7 @@ let config = {
 
   tabbarLayout: 'icon-right',
   tabSubPages: false,
-  pageTransition: 'ios',
+  // pageTransition: 'ios',
 
 
   platforms: {
@@ -43,16 +43,7 @@ let config = {
       pageTransitionDelay: 0// Allows for navigation through Tab Pages
     }
   }
-  // platforms: {
-  //   ios: {
-  //     tabbarPlacement: 'top',
-  //   },
-
-  //   android:{
-  //     tabbarPlacement:'bottom'
-  //   }
-  // }
 }
-enableProdMode();
+// enableProdMode();
 ionicBootstrap(MyApp, providers, config);
 // http://ionicframework.com/docs/v2/api/config/Config/

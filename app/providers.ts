@@ -32,7 +32,7 @@ class CustomHttp extends Http {
       });
   }
 
-  post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+  post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response|any> {
     console.log('post...');
     return super.post(url, body, options)
       .map(res => {

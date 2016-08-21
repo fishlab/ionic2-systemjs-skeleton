@@ -18,8 +18,11 @@ export class GoodsSearchService {
 
     }
 
-    async search() {
-        var goodsList = await this.http.post(config.api_base_url+this.url,{"es":"6"})
+    async search(page:number = 0,page_size:number = 20 ) {
+        var goodsList = await this.http.post(config.api_base_url+this.url,{
+            page:page,
+            page_size:page_size
+        })
             // .map(res => res.json())
             // .map(goodsList => {
             //     goodsList.forEach(goods => {
