@@ -1,3 +1,5 @@
+declare var __profile__;
+
 //todo config from localStorage
 interface Config {
     
