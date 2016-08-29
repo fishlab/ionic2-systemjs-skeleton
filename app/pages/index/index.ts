@@ -16,7 +16,7 @@ export class IndexPage {
 
 
   loadProducts() {
-    return this.goodsService.search(this.page, 5).then((result: any) => {
+    return this.goodsService.search(this.page, 5).then(result => {
       // this.products.splice(0,this.products.length);
       for (let p of result.data) {
         this.products.push(p);

@@ -105,6 +105,7 @@
     gulp.task('build', function (done) {
         runSequence(
             'clean',
+            'profile',
             'compile-tsc',            
             ['html', 'sass', 'fonts', 'build-js-lib'
                 //, 'build-js-app'

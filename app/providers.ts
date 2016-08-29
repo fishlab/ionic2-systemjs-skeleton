@@ -1,6 +1,6 @@
 import {provide, Provider} from '@angular/core';
 import {Injectable} from '@angular/core';
-import {HTTP_PROVIDERS , RequestOptions, XHRBackend}
+import {HTTP_PROVIDERS , RequestOptions, XHRBackend,Http as AngularHttp}
 from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -17,6 +17,7 @@ export let providers = [
     useFactory: (backend: XHRBackend, options: RequestOptions) => new Http(backend, options),
     deps: [XHRBackend, RequestOptions]
   }),
+  // new Pro
   NavController,
   AccountService,
   GoodsSearchService,

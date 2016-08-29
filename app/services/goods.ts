@@ -1,4 +1,4 @@
-import { Http, Response, Headers  } from '@angular/http';
+import { Http } from './http';
 import { Injectable } from "@angular/core"
 import {Subscription, Observable} from 'rxJs';
 import 'rxjs/add/operator/toPromise';

@@ -7,12 +7,41 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let order of orders" >
-    <ion-list-header>{{order.shop.name}}</ion-list-header>
-    <ion-item *ngFor="let item of order.items">
-      <ion-icon name="ionic" item-left></ion-icon>
-      {{item.product.name}} ({{item.product.unit_price}}) x {{item.amount}}
-    </ion-item>
+  <ion-list>
+    <ion-item-group *ngFor="let order of orders">
+      <ion-list-header>{{order.shop.name}}</ion-list-header>
+      <ion-item-sliding *ngFor="let item of order.items">
+        <ion-item>
+          <ion-icon name="ionic" item-left></ion-icon>
+          {{item.product.name}} - ({{item.product.unit_price}}) x {{item.amount}}
+    
+         <button clear  item-right>
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+          <button clear  item-right>
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+
+        </ion-item>
+
+        <ion-item-options side="left">
+          <button primary>
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+          <button secondary>
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button danger>
+        <ion-icon name="trash"></ion-icon>
+        Email
+      </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
   </ion-list>
 
 

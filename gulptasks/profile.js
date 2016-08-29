@@ -1,16 +1,20 @@
 module.exports = function (gulp, isRelease) {
+    var gutil = require('gulp-util');
     var rename = require("gulp-rename");
-    var setProfile = function (name) {
+    var copyProfile = function (name) {
         return gulp.src('./app/profiles/' + name + '.js')
             .pipe(rename('profile.js'))
             .pipe(gulp.dest('./www/build'))
     }
 
-    gulp.task('dev-profile', function () {
-        return setProfile('dev');
+    gulp.task('profile', function () {
+        var profile = 'dev';
+        if (isRelease){
+            profile ='release';
+        }
+        gutil.log('** current profile is '+ profile)
+        return copyProfile(profile);
     });
 
-    gulp.task('release-profile', function () {
-        return setProfile('release');
-    })
+
 };
