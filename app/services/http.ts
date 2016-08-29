@@ -42,3 +42,14 @@ export
   }
 
 }
+export
+class CustomRequestOptions extends BaseRequestOptions {
+  constructor() {
+    super();
+    // this.headers.set('Content-Type', 'application/json');
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Accept', 'application/json');
+    this.withCredentials = true;
+  }
+
+}
