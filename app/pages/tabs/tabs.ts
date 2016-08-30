@@ -18,7 +18,7 @@ export class TabsPage {
   private tab2Root: any;
   private tab3Root: any;
   private indexPage:any;
-
+  private n = 0;
 
   constructor() {
     // this tells the tabs component which Pages
@@ -29,5 +29,8 @@ export class TabsPage {
     this.tab1Root = HomePage;
     this.tab2Root = AboutPage;
     this.tab3Root = ContactPage;
+    setInterval(()=>{
+      this.n ++;
+    }, 1000);
   }
 }

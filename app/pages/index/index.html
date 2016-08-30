@@ -25,8 +25,10 @@
       <ion-avatar item-left>
         <ion-img [src]="product.picture" width="48" height="48"></ion-img>
       </ion-avatar>
-      <h2>{{product.name}}</h2> - ￥{{product.unit_price}}
-
+      <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
+        <button clear  item-right>
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
     </ion-item>
   </ion-list>
 

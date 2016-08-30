@@ -5,21 +5,32 @@ import {SignInPage} from './auth';
 import {ProfilePage} from "./profile";
 import {OrderPage} from './order';
 
+import { Http } from '../../services/http';
+import {api} from '../../services/config';
 
 @Component({
-  templateUrl: 'build/pages/home/home.html'
+  templateUrl: 'build/pages/home/empty.html'
 })
 export class HomePage {
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController,
+    private http: Http
+  ) {
     //tests
     // this.navCtrl.push(OrderPage);
     // return;
-    var signedIn = !true;
-    if (!signedIn) {
-      this.navCtrl.push(SignInPage);
-    } else {
-      this.navCtrl.push(ProfilePage);
-    }
+
+    http.get(api('/auth/status')).toPromise().then(user => {
+      var signedIn = user;
+      if (!signedIn) {
+        this.navCtrl.setRoot(SignInPage);
+      } else {
+        this.navCtrl.setRoot(ProfilePage);
+        // this.navCtrl.pop();        
+        
+      }
+    });
+
+
 
   }
 }
