@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 import {NavController} from 'ionic-angular';
 import {Http,CustomRequestOptions} from "./services/http";
 import {GoodsSearchService} from "./services/goods";
-import {AccountService} from "./services/AccountService";
+import {AccountService} from "./services/account_";
 
 export let providers = [
   HTTP_PROVIDERS,

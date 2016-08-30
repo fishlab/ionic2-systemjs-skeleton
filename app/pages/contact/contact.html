@@ -15,13 +15,13 @@
           <ion-icon name="ionic" item-left></ion-icon>
           {{item.product.name}} - ({{item.product.unit_price}}) x {{item.amount}}
     
-         <button clear  item-right>
+         <button clear  item-right (click)="removeAmount(item)">
             <ion-icon name="remove-circle"></ion-icon>
           </button>
           <span item-right>
           {{item.amount}}            
           </span>
-          <button clear  item-right>
+          <button clear  item-right (click)="addAmount(item)">
             <ion-icon name="add-circle"></ion-icon>
           </button>
 

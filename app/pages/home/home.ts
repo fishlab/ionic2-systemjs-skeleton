@@ -19,8 +19,8 @@ export class HomePage {
     // this.navCtrl.push(OrderPage);
     // return;
 
-    http.get(api('/auth/status')).toPromise().then(user => {
-      var signedIn = user;
+    http.get(api('/auth/status')).toPromise().then(ret => {
+      var signedIn = ret.user;
       if (!signedIn) {
         this.navCtrl.setRoot(SignInPage);
       } else {

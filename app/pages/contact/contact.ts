@@ -26,4 +26,22 @@ export class ContactPage {
     console.log('****on page will enter messages pane');
     this.loadTemporarayOrders();
   }
+
+  private async setAmount(item, newAmount) {
+    return this.http.post(api('/user/order/temporary-order-set-amount'), {
+      product_id:item.product_id,
+      new_amount:newAmount
+    })
+      .toPromise().then(ret => {
+        ret && (item.amount = ret.new_amount);
+      })
+  }
+
+  private addAmount(item) {
+    return this.setAmount(item, item.amount + 1);
+  }
+
+  private removeAmount(item) {
+    return this.setAmount(item,item.amount - 1);
+  }
 }
