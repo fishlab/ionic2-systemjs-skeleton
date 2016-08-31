@@ -7,9 +7,9 @@ import 'rxjs/Rx';
 
 import {NavController} from 'ionic-angular';
 import {Http,CustomRequestOptions} from "./services/http";
-import {GoodsSearchService} from "./services/goods";
+import {ProductSearchService,ProductDisplayService} from "./services/product";
 import {AccountService} from "./services/account_";
-
+import {OrderService} from "./services/order";
 export let providers = [
   HTTP_PROVIDERS,
   provide(RequestOptions, { useClass: CustomRequestOptions }),
@@ -20,6 +20,7 @@ export let providers = [
   // new Pro
   NavController,
   AccountService,
-  GoodsSearchService,
-  
+  ProductSearchService,
+  ProductDisplayService,
+  OrderService
 ];

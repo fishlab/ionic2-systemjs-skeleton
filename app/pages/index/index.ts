@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {GoodsSearchService} from "../../services/goods";
+import {ProductSearchService,ProductDisplayService} from "../../services/product";
 import {DetailPage} from './detail';
 
 @Component({
@@ -10,7 +10,10 @@ export class IndexPage {
   private products: Array<any> = [];
   private page: any = 1;
 
-  constructor(private navCtrl: NavController, private goodsService: GoodsSearchService) {
+  constructor(private navCtrl: NavController,
+    private goodsService: ProductSearchService,
+    private productDisplayService: ProductDisplayService
+    ) {
     this.loadProducts();
   }
 

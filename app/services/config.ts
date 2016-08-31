@@ -2,7 +2,9 @@ declare var __profile__;
 
 //todo config from localStorage
 interface Config {
-    
+    api_base_url?:string;
+    image_server?:string;
+    x;    
 }
 
 var defaultConfig = __profile__;
@@ -12,7 +14,7 @@ var defaultConfig = __profile__;
 //     api_base_url : "http://192.168.31.127"
 // }
 
-export let config:any = defaultConfig;
+export let config:Config = defaultConfig;
 
 export function api(apiUrl){
     return config.api_base_url + apiUrl;

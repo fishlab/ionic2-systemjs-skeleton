@@ -9,7 +9,7 @@ import {config} from './config';
 
 
 @Injectable()
-export class GoodsSearchService {
+export class ProductSearchService {
     //todo configurable
     private url = '/user/index/products';  // URL to web API
     // protected headers = new Headers({ 'Content-Type': 'application/json' });
@@ -32,5 +32,14 @@ export class GoodsSearchService {
             // })
             .toPromise();
         return goodsList;
+    }
+}
+
+@Injectable()
+export class ProductDisplayService{
+    getImageUrl(product){
+        if (product.images && product.images.length){
+            return config.image_server + '/' + product.images[0];
+        }
     }
 }

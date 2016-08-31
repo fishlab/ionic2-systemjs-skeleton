@@ -1,13 +1,15 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import { Http } from '../../services/http';
-import {api} from '../../services/config';
+import {OrderService} from '../../services/order';
+
 @Component({
   templateUrl: 'build/pages/contact/contact.html'
 })
 export class ContactPage {
   private orders: any = [];
-  constructor(private navCtrl: NavController, private http: Http) {
+  constructor(private navCtrl: NavController,
+    private orderService: OrderService
+    ) {
   }
   //first enter
   // ionViewLoaded() {
@@ -16,25 +18,19 @@ export class ContactPage {
 
 
   loadTemporarayOrders() {
-    this.http.post(api('/user/order/temporary-orders'), null).toPromise().then(orders => {
+    this.orderService.getTemporarayOrders().then(orders => {
       this.orders = orders;
     });
   }
 
   //every enter
   onPageWillEnter() {
-    console.log('****on page will enter messages pane');
+    console.log('*** on page will enter messages pane');
     this.loadTemporarayOrders();
   }
 
   private async setAmount(item, newAmount) {
-    return this.http.post(api('/user/order/temporary-order-set-amount'), {
-      product_id:item.product_id,
-      new_amount:newAmount
-    })
-      .toPromise().then(ret => {
-        ret && (item.amount = ret.new_amount);
-      })
+    return this.orderService.temporarayOrderSetAmount(item, newAmount);
   }
 
   private addAmount(item) {
@@ -42,6 +38,6 @@ export class ContactPage {
   }
 
   private removeAmount(item) {
-    return this.setAmount(item,item.amount - 1);
+    return this.setAmount(item, item.amount - 1);
   }
 }
