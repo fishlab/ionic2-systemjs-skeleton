@@ -6,7 +6,7 @@ import {HomePage} from '../home/home';
 import {AboutPage} from '../about/about';
 import {ContactPage} from '../contact/contact';
 
-import {AccountService} from "../../services/account_";
+import {AccountService,SiginEvent} from "../../services/account_";
 import {OrderService} from "../../services/order";
 
 @Component({
@@ -24,7 +24,8 @@ export class TabsPage {
 
   constructor(
     private accountService: AccountService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private siginEvent: SiginEvent
   ) {
     // this tells the tabs component which Pages
     // should be each tab's root Page
@@ -39,6 +40,11 @@ export class TabsPage {
   }
 
   private checkStatus() {
+
+    this.siginEvent.subscribe(user =>{
+      console.log('subscribe on sign event with user:',user);
+      this.showTabBadges();
+    })
     this.accountService.getStatus().then(user => {
       this.showTabBadges();
     })

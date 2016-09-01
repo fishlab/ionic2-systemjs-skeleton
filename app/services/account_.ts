@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable,Component,EventEmitter } from "@angular/core";
 import { Http } from './http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
@@ -10,10 +10,16 @@ export interface Account {
     mobile: string;
 }
 
-//todo refactor
+export class SiginEvent extends EventEmitter<any>{
+
+}
 @Injectable()
+//todo refactor
 export class AccountService extends RemoteService {
-    constructor(private http: Http) {
+    constructor(
+        private http: Http,
+        private siginEvent:SiginEvent
+    ) {
         super();
     }
     private apiUrl = '/auth/sign-in';  // URL to web API
@@ -32,13 +38,14 @@ export class AccountService extends RemoteService {
             .toPromise()
             .then(user => {
                 this.user = user;
+                this.siginEvent.next(user);
                 return user;
             })
     }
 
     getStatus() {
         return this.http.get(this.api('/auth/status')).toPromise().then(ret => {
-            this.user = ret;
+            this.user = ret.user;
             return this.user;
         });
     }
