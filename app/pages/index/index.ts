@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {ProductSearchService,ProductDisplayService} from "../../services/product";
+import { ToastController } from 'ionic-angular';
+
+import {ProductSearchService, ProductDisplayService} from "../../services/product";
 import {DetailPage} from './detail';
+import {OrderService} from "../../services/order";
 
 @Component({
   templateUrl: 'build/pages/index/index.html'
@@ -12,8 +15,11 @@ export class IndexPage {
 
   constructor(private navCtrl: NavController,
     private goodsService: ProductSearchService,
-    private productDisplayService: ProductDisplayService
-    ) {
+    private productDisplayService: ProductDisplayService,
+    private orderService: OrderService,
+    private toastCtrl: ToastController
+
+  ) {
     this.loadProducts();
   }
 
@@ -59,6 +65,17 @@ export class IndexPage {
 
   openDetail(product) {
     this.navCtrl.push(DetailPage);
+  }
+
+  temporaryOrderAdd(product) {
+    this.orderService.temporaryOrderAdd(product).then(() => {
+      let toast = this.toastCtrl.create({
+        position: 'top',
+        message: '已加入购物车',
+        duration: 1500
+      });
+      toast.present();
+    });
   }
 
   doInfinite(infiniteScroll: any) {

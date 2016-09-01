@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 
 import {IndexPage} from '../index/index';
-
 import {HomePage} from '../home/home';
 import {AboutPage} from '../about/about';
-import {ContactPage} from '../contact/contact';
+import {TemporaryOrderPage} from '../order/temporary-order';
 
 import {AccountService,SiginEvent} from "../../services/account_";
 import {OrderService} from "../../services/order";
@@ -34,7 +33,7 @@ export class TabsPage {
 
     this.tab1Root = HomePage;
     this.tab2Root = AboutPage;
-    this.tab3Root = ContactPage;
+    this.tab3Root = TemporaryOrderPage;
 
     this.checkStatus();
   }

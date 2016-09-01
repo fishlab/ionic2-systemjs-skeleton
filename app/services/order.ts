@@ -49,4 +49,33 @@ export class OrderService {
             });
 
     }
+    private findTemporaryOrderItemByProductId(product_id) {
+        var ret = null;
+        for (let order of this.temporaryOrders) {
+            for (let item of order.items) {
+                if (item.product_id == product_id) {
+                    ret = item;
+                    break;
+                }
+            }
+        }
+        return ret;
+
+    }
+
+    temporaryOrderAdd(product) {
+        return this.http.post(api('/user/order/temporary-order-add'), {
+            product_id: product.id,
+        })
+            .toPromise()
+            .then(ret => {
+                var amount = ret.new_amount;
+                var item = this.findTemporaryOrderItemByProductId(product.id);
+                if (item) {
+                    item.amount = amount;
+                    this.countAndUpdateTemporyOrderProductAmount();
+
+                }
+            })
+    }
 }

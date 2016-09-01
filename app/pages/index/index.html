@@ -26,7 +26,7 @@
         <ion-img [src]="productDisplayService.getImageUrl(product)+'?w=48&h=48'" width="48" height="48"></ion-img>
       </ion-avatar>
       <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
-        <button clear  item-right>
+        <button clear  item-right (click) = "temporaryOrderAdd(product)">
             <ion-icon name="add-circle"></ion-icon>
           </button>
     </ion-item>

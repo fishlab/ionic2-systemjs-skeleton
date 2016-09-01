@@ -5,7 +5,7 @@ import {OrderService} from '../../services/order';
 @Component({
   templateUrl: 'build/pages/contact/contact.html'
 })
-export class ContactPage {
+export class TemporaryOrderPage {
   private orders: any = [];
   constructor(private navCtrl: NavController,
     private orderService: OrderService
