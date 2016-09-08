@@ -29,6 +29,11 @@ export class OrderService {
     //     })
     // }
 
+    private setTemporarayOrders(orders){
+        this.temporaryOrders = orders;
+        this.countAndUpdateTemporyOrderProductAmount();
+    }
+
     getTemporarayOrders() {
         return this.http.post(api('/user/order/temporary-orders')).toPromise().then(orders => {
             this.temporaryOrders = orders;
@@ -43,9 +48,8 @@ export class OrderService {
             new_amount: newAmount
         })
             .toPromise()
-            .then(ret => {
-                item.amount = ret.new_amount;
-                this.countAndUpdateTemporyOrderProductAmount();
+            .then(orders => {
+                this.setTemporarayOrders(orders);
             });
 
     }
@@ -68,14 +72,15 @@ export class OrderService {
             product_id: product.id,
         })
             .toPromise()
-            .then(ret => {
-                var amount = ret.new_amount;
-                var item = this.findTemporaryOrderItemByProductId(product.id);
-                if (item) {
-                    item.amount = amount;
-                    this.countAndUpdateTemporyOrderProductAmount();
+            .then(orders => {
+                this.setTemporarayOrders(orders);
+                // var amount = ret.new_amount;
+                // var item = this.findTemporaryOrderItemByProductId(product.id);
+                // if (item) {
+                //     item.amount = amount;
+                //     this.countAndUpdateTemporyOrderProductAmount();
 
-                }
+                // }
             })
     }
 }
