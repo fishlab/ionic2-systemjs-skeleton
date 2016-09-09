@@ -12,7 +12,7 @@ import {OrderService} from "../../services/order";
 export class IndexPage {
   private products: Array<any> = [];
   private page: any = 1;
-
+  private search:any={};
   constructor(private navCtrl: NavController,
     private goodsService: ProductSearchService,
     private productDisplayService: ProductDisplayService,
@@ -25,7 +25,7 @@ export class IndexPage {
 
 
   loadProducts() {
-    return this.goodsService.search(this.page, 5).then(result => {
+    return this.goodsService.search(this.search,this.page, 15).then(result => {
       // this.products.splice(0,this.products.length);
       for (let p of result.data) {
         this.products.push(p);

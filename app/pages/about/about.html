@@ -10,10 +10,27 @@
 
   <h2> {{shop?.name}} </h2>
 
-  <ion-list style="width:150px">
-    <ion-item *ngFor="let category of categories" (click)="itemSelected(item)">
-      {{category.name}}
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-33>
+        <ion-list>
+          <ion-item *ngFor="let category of categories" (click)="selecteCategory(category)">
+            {{category.name}}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+      <ion-col width-67>
+        <ion-list>
+          <ion-item *ngFor="let product of products">
+            {{product.name}}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
 
 </ion-content>
