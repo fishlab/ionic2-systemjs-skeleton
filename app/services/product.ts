@@ -35,12 +35,3 @@ export class ProductSearchService {
         return goodsList;
     }
 }
-
-@Injectable()
-export class ProductDisplayService{
-    getImageUrl(product){
-        if (product.images && product.images.length){
-            return config.image_server + '/' + product.images[0];
-        }
-    }
-}

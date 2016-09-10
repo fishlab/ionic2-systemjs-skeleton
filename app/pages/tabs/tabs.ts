@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {IndexPage} from '../index/index';
 import {HomePage} from '../home/home';
-import {AboutPage} from '../about/about';
+import {CategoryPage} from '../shop/category';
 import {TemporaryOrderPage} from '../order/temporary-order';
 
 import {AccountService,SiginEvent} from "../../services/account_";
@@ -32,7 +32,7 @@ export class TabsPage {
     this.indexPage = IndexPage;
 
     this.tab1Root = HomePage;
-    this.tab2Root = AboutPage;
+    this.tab2Root = CategoryPage;
     this.tab3Root = TemporaryOrderPage;
 
     this.checkStatus();

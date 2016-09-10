@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{shop?.name}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="category">
+
+
+
+  <!--<img [src]="getShpoLogoUrl(shop)" *ngIf="shop" />-->
+
+
+  <ion-grid style="height:100%">
+    <ion-row style="height:100%">
+
+      <ion-col>
+        <ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
+
+          <ion-list>
+            <ion-item (click)="selecteCategory(null)">
+              所有商品
+            </ion-item>
+            <ion-item *ngFor="let category of categories" (click)="selecteCategory(category)">
+              {{category.name}}
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+      </ion-col>
+
+      <ion-col width-67>
+        <ion-scroll scrollY="true" class="ion-scroll-full-height" scrollbar-y="false" style="height:100%">
+          <ion-list>
+            <ion-item *ngFor="let product of products" xstyle="display: flex; flex-direction:row; flex-wrap:wrap; padding: 3px 3px;">
+              <ion-avatar item-left>
+                <ion-img [src]="getProductImageUrl(product)" width="48" height="48"></ion-img>
+              </ion-avatar>
+              <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
+              <button clear item-right (click)="temporaryOrderAdd(product)">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+            </ion-item>
+          </ion-list>
+          <ion-infinite-scroll (ionInfinite)="doInfinite($event)" loadingText="加载中">
+            <ion-infinite-scroll-content style="height:100%"></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+
+
+        </ion-scroll>
+
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--<div style="width:33%;float:left;height:100%;">
+    <ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
+
+      <ion-list>
+        <ion-item (click)="selecteCategory(null)">
+          所有商品
+        </ion-item>
+        <ion-item *ngFor="let category of categories" (click)="selecteCategory(category)">
+          {{category.name}}
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+  </div>-->
+
+  <!--<div style="width:67%;float:right;height:100%">
+
+    <ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
+      <ion-list style="height:100%">
+        <ion-item *ngFor="let product of products" xstyle="display: flex; flex-direction:row; flex-wrap:wrap; padding: 3px 3px;">
+          <ion-avatar item-left>
+            <ion-img [src]="getProductImageUrl(product)" width="48" height="48"></ion-img>
+          </ion-avatar>
+          <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
+          <button clear item-right (click)="temporaryOrderAdd(product)">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" loadingText="加载中" xxthreshold="10px">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+    </ion-scroll>-->
+
+    <!--<ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
+
+      <ion-list [virtualScroll]="products" [sadas]="myHeaderFn" style="height:100%">
+
+        <ion-item-divider *virtualHeader="let header">
+        Header: {{ header }}
+      </ion-item-divider>
+
+        <ion-item *virtualItem="let item">
+          Item: {{ item |json }}
+        </ion-item>
+
+
+
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" loadingText="加载中" threshold="20%">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+
+      </ion-infinite-scroll>
+
+    </ion-scroll>-->
+
+
+  <!--</div>-->
+
+
+
+
+</ion-content>

@@ -7,7 +7,7 @@ import 'rxjs/Rx';
 
 import {NavController} from 'ionic-angular';
 import {Http,CustomRequestOptions} from "./services/http";
-import {ProductSearchService,ProductDisplayService} from "./services/product";
+import {ProductSearchService} from "./services/product";
 import {AccountService,SiginEvent} from "./services/account_";
 import {OrderService} from "./services/order";
 export let providers = [
@@ -22,6 +22,5 @@ export let providers = [
   AccountService,
   SiginEvent,
   ProductSearchService,
-  ProductDisplayService,
   OrderService
 ];

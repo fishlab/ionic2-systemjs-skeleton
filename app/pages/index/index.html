@@ -4,9 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="index">
+<ion-content class="index" style=" height: 100%;">
   <ion-searchbar (ionInput)="getItems($event)" placeholder="搜索"></ion-searchbar>
-
 
 <!--<ion-list [virtualScroll]="products" approxItemHeight="50px" [headerFn]="myHeaderFn">
   <ion-item-divider *virtualHeader="let header">
@@ -23,7 +22,7 @@
   <ion-list>
     <ion-item *ngFor="let product of products">
       <ion-avatar item-left>
-        <ion-img [src]="productDisplayService.getImageUrl(product)+'?w=48&h=48'" width="48" height="48"></ion-img>
+        <ion-img [src]="getProductImageUrl(product,48)" width="48" height="48"></ion-img>
       </ion-avatar>
       <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
         <button clear  item-right (click) = "temporaryOrderAdd(product)">
@@ -35,5 +34,6 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" loadingText="加载中">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
 
 </ion-content>

@@ -2,24 +2,24 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
-import {ProductSearchService, ProductDisplayService} from "../../services/product";
+import {ProductSearchService} from "../../services/product";
 import {DetailPage} from './detail';
 import {OrderService} from "../../services/order";
-
+import {Page} from "../page";
 @Component({
   templateUrl: 'build/pages/index/index.html'
 })
-export class IndexPage {
+export class IndexPage  extends Page{
   private products: Array<any> = [];
   private page: any = 1;
   private search:any={};
   constructor(private navCtrl: NavController,
     private goodsService: ProductSearchService,
-    private productDisplayService: ProductDisplayService,
     private orderService: OrderService,
     private toastCtrl: ToastController
 
   ) {
+    super();
     this.loadProducts();
   }
 

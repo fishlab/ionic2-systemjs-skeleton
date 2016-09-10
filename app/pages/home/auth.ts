@@ -21,11 +21,32 @@ export class SignInPage {
     this.accountService.signIn(this.name, this.password).then(result => {
       this.result = result;
       this.navCtrl.push(ProfilePage);
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err);
-      
+
     })
 
+  }
+
+  siginUp() {
+    this.navCtrl.setRoot(SignUpPage);
+  }
+}
+
+@Component({
+  templateUrl: 'build/pages/home/sign-up.html'
+
+})
+
+export class SignUpPage {
+
+  constructor(
+    private navCtrl: NavController,
+    private accountService: AccountService) {
+
+  }
+  siginIn() {
+    this.navCtrl.setRoot(SignInPage);
   }
 }
 
