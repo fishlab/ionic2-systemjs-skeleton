@@ -1,4 +1,4 @@
-import {config} from "../services/config";
+import {config,api} from "../services/config";
 
 export class Page {
 
@@ -24,5 +24,13 @@ export class Page {
             url = config.image_server + '/' + product.images[0] + this.withWidthAndHeight(w, h);
         }
         return url;
+    }
+
+    apiUrl(api_uri:string){
+        return api(api_uri);
+    }
+
+    userApi(api_uri:string){
+        return api('/user'+api_uri);
     }
 }

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      支付
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  {{order?.total_price}}
+
+  <p>
+    <button block (click)="paymentMock()">模拟支付</button>
+
+  </p>
+
+  <p>
+    <button secondary block>微信支付</button>
+
+  </p>
+
+
+
+</ion-content>

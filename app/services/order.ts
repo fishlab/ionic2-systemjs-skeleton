@@ -35,10 +35,10 @@ export class OrderService {
     }
 
     getTemporarayOrders() {
-        return this.http.post(api('/user/order/temporary-orders')).toPromise().then(orders => {
-            this.temporaryOrders = orders;
+        return this.http.post(api('/user/order/temporary-orders')).toPromise().then(  ret => {
+            this.temporaryOrders = ret.orders;
             this.countAndUpdateTemporyOrderProductAmount();
-            return this.temporaryOrders;
+            return ret;
         });
     }
 
@@ -48,8 +48,8 @@ export class OrderService {
             new_amount: newAmount
         })
             .toPromise()
-            .then(orders => {
-                this.setTemporarayOrders(orders);
+            .then(ret => {
+                this.setTemporarayOrders(ret.orders);
             });
 
     }
@@ -72,8 +72,8 @@ export class OrderService {
             product_id: product.id,
         })
             .toPromise()
-            .then(orders => {
-                this.setTemporarayOrders(orders);
+            .then(ret => {
+                this.setTemporarayOrders(ret.orders);
                 // var amount = ret.new_amount;
                 // var item = this.findTemporaryOrderItemByProductId(product.id);
                 // if (item) {

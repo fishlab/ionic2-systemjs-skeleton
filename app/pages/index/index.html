@@ -21,9 +21,9 @@
 
   <ion-list>
     <ion-item *ngFor="let product of products">
-      <ion-avatar item-left>
+      <div item-left>
         <ion-img [src]="getProductImageUrl(product,48)" width="48" height="48"></ion-img>
-      </ion-avatar>
+      </div>
       <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
         <button clear  item-right (click) = "temporaryOrderAdd(product)">
             <ion-icon name="add-circle"></ion-icon>

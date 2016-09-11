@@ -9,19 +9,22 @@
 <ion-content>
   <ion-list>
     <ion-item-group *ngFor="let order of orders">
-      <ion-list-header>{{order.shop.name}}</ion-list-header>
+
       <ion-item-sliding *ngFor="let item of order.items">
         <ion-item>
-          <ion-icon name="ionic" item-left></ion-icon>
+          <div item-left>
+            <ion-img [src]="getProductImageUrl(item.product,48)" width="48" height="48"></ion-img>
+          </div>
+
           {{item.product.name}} - ({{item.product.unit_price}}) x {{item.amount}}
-    
-         <button clear  item-right (click)="removeAmount(item)">
+
+          <button clear item-right (click)="removeAmount(item)">
             <ion-icon name="remove-circle"></ion-icon>
           </button>
           <span item-right>
           {{item.amount}}            
           </span>
-          <button clear  item-right (click)="addAmount(item)">
+          <button clear item-right (click)="addAmount(item)">
             <ion-icon name="add-circle"></ion-icon>
           </button>
 
@@ -44,8 +47,32 @@
       </button>
         </ion-item-options>
       </ion-item-sliding>
+
+      <ion-list-header>
+        <div item-left>
+          {{order.shop.name}}
+        </div>
+
+        <div item-right>
+          {{order.total_price}}
+        </div>
+
+        <div item-right>
+          <button outline (click)="checkout(order)">结算</button>
+        </div>
+
+      </ion-list-header>
     </ion-item-group>
   </ion-list>
 
 
+
+
+
 </ion-content>
+
+<ion-footer no-shadow>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

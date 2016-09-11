@@ -34,9 +34,9 @@
         <ion-scroll scrollY="true" class="ion-scroll-full-height" scrollbar-y="false" style="height:100%">
           <ion-list>
             <ion-item *ngFor="let product of products" xstyle="display: flex; flex-direction:row; flex-wrap:wrap; padding: 3px 3px;">
-              <ion-avatar item-left>
+              <div item-left>
                 <ion-img [src]="getProductImageUrl(product)" width="48" height="48"></ion-img>
-              </ion-avatar>
+              </div>
               <h2>{{product.name}}</h2> - ¥{{product.unit_price}}
               <button clear item-right (click)="temporaryOrderAdd(product)">
             <ion-icon name="add-circle"></ion-icon>
@@ -91,7 +91,7 @@
 
     </ion-scroll>-->
 
-    <!--<ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
+  <!--<ion-scroll scrollY="true" class="ion-scroll-full-height" style="height:100%">
 
       <ion-list [virtualScroll]="products" [sadas]="myHeaderFn" style="height:100%">
 

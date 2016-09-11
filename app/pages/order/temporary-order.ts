@@ -1,15 +1,20 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {OrderService} from '../../services/order';
+import {Page} from '../page';
+import {PaymentPage} from "./payment";
 
 @Component({
-  templateUrl: 'build/pages/contact/contact.html'
+  templateUrl: 'build/pages/order/temporary-order.html'
 })
-export class TemporaryOrderPage {
+export class TemporaryOrderPage extends Page {
   private orders: any = [];
-  constructor(private navCtrl: NavController,
+  private total: number;
+  constructor(
+    private navCtrl: NavController,
     private orderService: OrderService
-    ) {
+  ) {
+    super();
   }
   //first enter
   // ionViewLoaded() {
@@ -18,8 +23,9 @@ export class TemporaryOrderPage {
 
 
   loadTemporarayOrders() {
-    this.orderService.getTemporarayOrders().then(orders => {
-      this.orders = orders;
+    this.orderService.getTemporarayOrders().then(ret => {
+      this.orders = ret.orders;
+      this.total = ret.total;
     });
   }
 
@@ -39,5 +45,12 @@ export class TemporaryOrderPage {
 
   private removeAmount(item) {
     return this.setAmount(item, item.amount - 1);
+  }
+
+  checkout(order) {
+    //todo checkout page
+    this.navCtrl.push(PaymentPage, {
+      order: order
+    });
   }
 }
