@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-group *ngFor="let order of orders">
+    <ion-item-group *ngFor="let order of orderService.temporaryOrders">
 
       <ion-item-sliding *ngFor="let item of order.items">
         <ion-item>

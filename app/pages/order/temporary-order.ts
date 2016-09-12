@@ -8,8 +8,8 @@ import {PaymentPage} from "./payment";
   templateUrl: 'build/pages/order/temporary-order.html'
 })
 export class TemporaryOrderPage extends Page {
-  private orders: any = [];
-  private total: number;
+  // private orders: any = [];
+  // private total: number;
   constructor(
     private navCtrl: NavController,
     private orderService: OrderService
@@ -23,10 +23,12 @@ export class TemporaryOrderPage extends Page {
 
 
   loadTemporarayOrders() {
-    this.orderService.getTemporarayOrders().then(ret => {
-      this.orders = ret.orders;
-      this.total = ret.total;
-    });
+    // this.orderService.getTemporarayOrders().then(ret => {
+    //   this.orders = ret.orders;
+    //   this.total = ret.total;
+    // });
+    this.orderService.getTemporarayOrders();
+    
   }
 
   //every enter

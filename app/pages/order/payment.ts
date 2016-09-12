@@ -9,6 +9,9 @@ import {Page} from '../page';
 })
 export class PaymentPage extends Page {
     private order ;
+    private totalAmount = 0 ;
+    private totalPrice;
+
     constructor(
         private navController: NavController,
         private params: NavParams,
@@ -16,6 +19,9 @@ export class PaymentPage extends Page {
     ) {
         super();
         this.order = params.get('order');
+        this.order.items.forEach(item =>{
+            this.totalAmount +=item.amount;
+        })
     }
 
     paymentMock(){

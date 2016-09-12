@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>收货地址</ion-title>
+
+        <ion-buttons end>
+            <button royal>
+                添加
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list radio-group>
+
+        <ion-item *ngFor="let contact of contacts">
+            <ion-label>
+                <h2>{{contact.mobile}}</h2>
+                <p>{{contact.address}}</p>
+
+            </ion-label>
+            <div item-right (click)="edit(contact)">
+                修改 > 
+            </div>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

@@ -6,8 +6,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  {{order?.total_price}}
+<ion-content padding>
+
+  <h2>
+    数量:{{totalAmount}}
+  </h2>
+
+  <h2>
+    价格:{{order?.total_price}}
+  </h2>
 
   <p>
     <button block (click)="paymentMock()">模拟支付</button>

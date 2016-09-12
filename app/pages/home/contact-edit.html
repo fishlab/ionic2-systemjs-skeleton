@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>编辑地址</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>联系人姓名</ion-label>
+      <ion-input type="text" [(ngModel)]="contact.name"></ion-input>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>联系电话</ion-label>
+      <ion-input type="text" [(ngModel)]="contact.mobile"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>联系地址</ion-label>
+      <ion-input type="text" [(ngModel)]="contact.address"></ion-input>
+    </ion-item>
+
+    <ion-item-divider light></ion-item-divider>
+    
+    <ion-item>
+      <ion-label stacked> 设为默认</ion-label>
+      <ion-toggle [(ngModel)]="!contact.default" xchecked="false"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+
+  <button block (click)="save()">保存</button>
+
+</ion-content>

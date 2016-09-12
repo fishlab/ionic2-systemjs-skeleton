@@ -5,7 +5,7 @@ import {api} from "./config";
 @Injectable()
 export class OrderService {
     public temporyOrderProductAmount: number;
-    private temporaryOrders;
+    public temporaryOrders;
     constructor(private http: Http) {
 
     }
@@ -36,9 +36,8 @@ export class OrderService {
 
     getTemporarayOrders() {
         return this.http.post(api('/user/order/temporary-orders')).toPromise().then(  ret => {
-            this.temporaryOrders = ret.orders;
-            this.countAndUpdateTemporyOrderProductAmount();
-            return ret;
+            this.setTemporarayOrders(ret.orders);
+            return ret.orders;
         });
     }
 
