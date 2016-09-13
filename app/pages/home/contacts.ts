@@ -8,6 +8,7 @@ import {ContactEditPage} from "./contact-edit";
 })
 export class ContactsPage extends Page {
   private contacts;
+  private default;
   constructor(
     private navCtrl: NavController,
     private http: Http
@@ -20,14 +21,22 @@ export class ContactsPage extends Page {
   }
 
   getContacts() {
-    this.http.get(this.userApi('/contacts/list')).toPromise().then(contacts => {
-      this.contacts = contacts;
+    this.http.get(this.userApi('/contacts/list')).toPromise().then(ret => {
+      this.contacts = ret.contacts;
+      this.default = ret.default;
     });
+  }
+  create() {
+    this.navCtrl.push(ContactEditPage, {
+      contact: {}
+    });
+
   }
 
   edit(contact) {
     this.navCtrl.push(ContactEditPage, {
-      contact: contact
+      contact: contact,
+      default: this.default
     });
   }
 

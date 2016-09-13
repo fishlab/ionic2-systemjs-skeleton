@@ -25,12 +25,17 @@
       <ion-input type="text" [(ngModel)]="contact.address"></ion-input>
     </ion-item>
 
-    <ion-item-divider light></ion-item-divider>
+    <ion-item-divider></ion-item-divider>
     
-    <ion-item>
+    <ion-item *ngIf="!contact.id || contact.id != default ">
       <ion-label stacked> 设为默认</ion-label>
-      <ion-toggle [(ngModel)]="!contact.default" xchecked="false"></ion-toggle>
+      <ion-toggle [(ngModel)]="contact.set_default" xchecked="false"></ion-toggle>
     </ion-item>
+
+    <ion-item *ngIf="contact.id && contact.id == default">
+      已设为默认地址
+    </ion-item>
+
   </ion-list>
 
 

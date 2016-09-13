@@ -3,7 +3,7 @@
         <ion-title>收货地址</ion-title>
 
         <ion-buttons end>
-            <button royal>
+            <button royal (click)="create()" [disabled]="!contacts || contacts.length>5">
                 添加
         <ion-icon name="person-add"></ion-icon>
       </button>
@@ -17,15 +17,20 @@
 
     <ion-list radio-group>
 
-        <ion-item *ngFor="let contact of contacts">
+        <ion-item *ngFor="let contact of contacts"  (click)="edit(contact)">
             <ion-label>
                 <h2>{{contact.mobile}}</h2>
                 <p>{{contact.address}}</p>
 
             </ion-label>
-            <div item-right (click)="edit(contact)">
+            <!--<div item-right (click)="edit(contact)">
                 修改 > 
+            </div>-->
+            <div item-right *ngIf="default == contact.id">
+                默认地址
             </div>
+
+              <ion-note item-right>修改 > </ion-note>
         </ion-item>
 
     </ion-list>
