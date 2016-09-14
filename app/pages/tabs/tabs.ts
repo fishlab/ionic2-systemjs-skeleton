@@ -5,9 +5,9 @@ import {HomePage} from '../home/home';
 import {CategoryPage} from '../shop/category';
 import {TemporaryOrderPage} from '../order/temporary-order';
 
-import {AccountService,SiginEvent} from "../../services/account_";
+import {AccountService, SiginEvent} from "../../services/account_";
 import {OrderService} from "../../services/order";
-
+declare var cordova
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
 })
@@ -40,13 +40,28 @@ export class TabsPage {
 
   private checkStatus() {
 
-    this.siginEvent.subscribe(user =>{
-      console.log('subscribe on sign event with user:',user);
+    this.siginEvent.subscribe(user => {
+      console.log('subscribe on sign event with user:', user);
       this.showTabBadges();
     })
     this.accountService.getStatus().then(user => {
       this.showTabBadges();
     })
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      cordova.plugins.notification.local.schedule({
+        id: 1,
+        title: "测试一下 Production Jour fixe",
+        text: "Duration 1h",
+        // firstAt: monday_9_am,
+        // every: "week",
+        // sound: "file://sounds/reminder.mp3",
+        // icon: "http://icons.com/?cal_id=1",
+        data: { meetingId: "123#fg8" }
+      });
+    }
+
   }
 
   private showTabBadges() {
